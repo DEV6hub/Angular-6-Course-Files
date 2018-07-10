@@ -7,6 +7,8 @@ import { NgbTabContent } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  verticalLogoPath = '../../../assets/images/Shirtastic-vertical.svg';
+  fractalPath = '../../../assets/images/Fractal.png';
 
   constructor() { }
 

@@ -14,3 +14,4 @@ export class ShirtGenderPipe implements PipeTransform {
         return items.filter(item => item.gender === filter);
     }
 }
+

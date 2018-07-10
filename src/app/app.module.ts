@@ -11,7 +11,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ShirtComponent } from './components/shirt/shirt.component';
 
-import { ShirtGenderPipe } from './filters/shirt-filter';
+import { ShirtGenderPipe } from './filters/shirt-filter.pipe';
 // For material
 import { MatTabsModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';

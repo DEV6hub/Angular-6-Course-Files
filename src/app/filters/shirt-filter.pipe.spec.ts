@@ -1,5 +1,5 @@
 
-import {ShirtGenderPipe} from './shirt-filter';
+import {ShirtGenderPipe} from './shirt-filter.pipe';
 import { Shirt } from '../shared/shirt';
 
 describe('Pipe: ShirtGenderPipe', () => {

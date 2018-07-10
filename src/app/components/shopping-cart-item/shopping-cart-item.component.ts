@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Shirt } from '../../shared/shirt';
 import { ShoppingItem } from '../../shared/shopping-item';
 import { ShirtSize } from '../../shared/shirt-size';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ShoppingCartService } from '../../core/shopping-cart.service';
 import { FormControl, Validators, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 

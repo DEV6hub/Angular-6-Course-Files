@@ -8,8 +8,8 @@ import { UserInfoService } from '../../core/user-info.service';
 @Component({
   selector: 'app-signup-user-info',
   templateUrl: './signup-user-info.component.html',
-  styleUrls: ['./signup-user-info.component.css']
-  //encapsulation: ViewEncapsulation.None
+  styleUrls: ['./signup-user-info.component.css'],
+  encapsulation: ViewEncapsulation.Native
 })
 export class SignupUserInfoComponent implements OnInit {
   userInfoForm: FormGroup;

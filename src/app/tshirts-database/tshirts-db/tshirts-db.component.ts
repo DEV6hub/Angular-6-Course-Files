@@ -157,6 +157,22 @@ export class TshirtsDbComponent {
       this.results = res.json();
     });
   }
+  doPOST() {
+    console.log('POST');
+    const url = `${this.apiRoot}`;
+    const data = {
+      'id': 9,
+      'name': 'Test Shirt',
+      'type': 'Mens Fine Jersey Short Sleeve',
+      'price': 21.99,
+      'imgSrc': '/assets/images/TShirtTest.jpg',
+      'gender': 'M'
+    };
+    this.http.post(url, data).subscribe(res => {
+      console.log(res.json());
+    });
+  }
+
 
 
 }

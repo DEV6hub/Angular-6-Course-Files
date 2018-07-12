@@ -25,6 +25,17 @@ export class SignupUserInfoComponent implements OnInit {
      }
 
   ngOnInit() {
+    this.userInfoForm = this.fb.group({
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      address1: new FormControl('', [Validators.required]),
+      address2: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
+      country: new FormControl('', [Validators.required]),
+      province: new FormControl('', [Validators.required]),
+      postal: new FormControl('', [Validators.required]),
+    });
   }
 
   selectCountry(country) {
@@ -36,7 +47,11 @@ export class SignupUserInfoComponent implements OnInit {
     this.selectedState = state;
   }
 
-  save() {
-
+  save(userInfo) {
+    if (this.userInfoForm.valid) {
+      //this.userInfo = new UserInfo(userInfo);
+      this.userInfoService.addUser(userInfo);
+      this.router.navigateByUrl('/catalog');
+    }
   }
 }

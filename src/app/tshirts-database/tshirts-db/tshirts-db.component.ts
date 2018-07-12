@@ -203,6 +203,18 @@ export class TshirtsDbComponent {
       this.results = res.json();
     });
   }
+  doGETAsPromiseError() {
+    console.log('GET AS PROMISE ERROR');
+    const url = `${this.apiRoot}/post`;
+    this.http.get(url)
+      .toPromise()
+      .then(
+        res => console.log(res.json()),
+        msg => {
+          console.error(`Error: ${msg.status} ${msg.statusText}`);
+          alert(`Error: ${msg.status} ${msg.statusText}`);
+        }
+      );
 
 
 

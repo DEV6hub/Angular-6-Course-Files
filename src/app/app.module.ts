@@ -43,6 +43,7 @@ import { BackgroundChangeDirective } from './customDirectives/background-change.
 import { StructuralUnlessDirective } from './customDirectives/structural-unless.directive';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { AuthGuard } from './core/auth.guard';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

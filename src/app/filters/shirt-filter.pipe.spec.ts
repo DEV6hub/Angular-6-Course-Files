@@ -23,9 +23,4 @@ describe('Pipe: ShirtGenderPipe', () => {
     const shirtCount = shirtGenderPipe.transform(shirts, 'M').length;
     expect(shirtCount).toBe(5);
   });
-
-  it('filter for Women tshirts', () => {
-    const shirtCount = shirtGenderPipe.transform(shirts, 'F').length;
-    expect(shirtCount).toBe(3);
-  });
 });

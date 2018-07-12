@@ -61,6 +61,10 @@ const routes: Routes = [
     loadChildren: 'app/tshirts-database/tshirts-database.module#TShirtsDatabaseModule',
   },
   {
+    path: 'allStyleOptions',
+    loadChildren: 'app/style-gallery/style-gallery.module#StyleGalleryModule'
+  },
+  {
     path: 'catalog', component: CatalogComponent,
     canActivate: [AuthGuard]
   }

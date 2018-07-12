@@ -194,6 +194,15 @@ export class TshirtsDbComponent {
         console.log(res.json());
       });
   }
+  doGETAsPromise() {
+    console.log('GET AS PROMISE');
+    const url = `${this.apiRoot}`;
+    this.http.get(url).toPromise()
+    .then(res => {
+      console.log(res.json());
+      this.results = res.json();
+    });
+  }
 
 
 

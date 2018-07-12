@@ -1,29 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpModule, Http, URLSearchParams, Headers, RequestOptions} from '@angular/http';
-import {trigger, state, style, animate, transition, group} from '@angular/animations';
-
 @Component({
   selector: 'app-tshirts-db',
-  templateUrl: './tshirts-db.component.html',
-  animations: [
-    trigger('heroState', [
-      state('M', style({
-        backgroundColor: 'blue',
-        transform: 'scale(1)'
-      })),
-      state('F',   style({
-        backgroundColor: 'pink',
-        transform: 'scale(1.1)'
-      })),
-      transition('M => F', animate('100ms ease-in')),
-      transition('F => M', animate('100ms ease-out'))
-    ])
-  ]
+  templateUrl: './tshirts-db.component.html'
 })
 export class TshirtsDbComponent {
-
-  //apiRoot = 'http://httpbin.org';
-  apiRoot = 'http://localhost:4000/tshirts';
+ apiRoot = 'http://localhost:4000/tshirts';
  results;
 
   constructor(private http: Http) { }

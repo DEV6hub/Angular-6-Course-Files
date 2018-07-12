@@ -15,7 +15,6 @@ import { ShirtGenderPipe } from './filters/shirt-filter.pipe';
 // For material
 import { MatTabsModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // For bootstrap tabs
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -103,7 +102,6 @@ const routes: Routes = [
     {
       preloadingStrategy: PreloadAllModules
     }),
-    BrowserAnimationsModule,
     MatTabsModule,
     MatButtonModule,
     NgbModule.forRoot(),

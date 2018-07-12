@@ -185,6 +185,15 @@ export class TshirtsDbComponent {
         console.log(res.json());
       } );
   }
+  doDELETE() {
+    console.log('DELETE');
+    const url = `${this.apiRoot}/2`;
+    const search = new URLSearchParams();
+    search.set('id', '2');
+    this.http.delete(url).subscribe(res => {
+        console.log(res.json());
+      });
+  }
 
 
 

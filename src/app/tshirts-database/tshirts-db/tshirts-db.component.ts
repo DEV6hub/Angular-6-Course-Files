@@ -139,5 +139,13 @@ export class TshirtsDbComponent {
       }
     );
   }
+  doGETAll() {
+    console.log('GET ALL');
+    const url = `${this.apiRoot}`;
+    this.http.get(url).subscribe(res => {
+      console.log(res.json());
+      this.results = res.json();
+    });
+  }
 
 }

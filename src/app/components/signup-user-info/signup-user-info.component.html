@@ -1,6 +1,11 @@
 <div class="signup-user-info-container">
   <h2>Awesome!</h2>
   <p>{{contactIntro}}</p>
+  <h3>Binding innerHTML</h3>
+<p>Interpolated Value:</p>
+<p>{{htmlSnippet}}</p>
+<p>Bound Value:</p>
+<p [innerHTML]="htmlSnippet"></p>
   <form [formGroup]="userInfoForm" novalidate (ngSubmit)="save(userInfoForm.value)">
     <div class="row">
       <div class="form-group col">

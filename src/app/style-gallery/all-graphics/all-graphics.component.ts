@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GRAPHICS } from '../../constants/static-data.constants';
 
 @Component({
   selector: 'app-all-graphics',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-graphics.component.css']
 })
 export class AllGraphicsComponent implements OnInit {
-
+  graphics = GRAPHICS;
   constructor() { }
 
   ngOnInit() {

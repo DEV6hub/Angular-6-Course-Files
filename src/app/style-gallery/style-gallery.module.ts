@@ -6,6 +6,8 @@ import { AllGraphicsComponent } from './all-graphics/all-graphics.component';
 import { StyleColorsComponent } from './style-colors/style-colors.component';
 import { GraphicComponent } from './graphic/graphic.component';
 import { UserInfoService } from '../core/user-info.service';
+import { AuthchildrenGuard } from './core/authchildren.guard';
+import { CanDeactivateGuard } from './core/can-deactivate.guard';
 const routes: Routes = [
   {
     path: '',
@@ -34,7 +36,9 @@ const routes: Routes = [
     GraphicComponent
   ],
   providers: [
-    UserInfoService
+    UserInfoService,
+    CanDeactivateGuard,
+    AuthchildrenGuard
   ],
 })
 export class StyleGalleryModule { }

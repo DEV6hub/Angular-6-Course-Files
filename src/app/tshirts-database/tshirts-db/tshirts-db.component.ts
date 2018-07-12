@@ -227,5 +227,20 @@ doGETAsObservableError() {
     }
   );
 }
+doGETWithHeaders() {
+  console.log('GET WITH HEADERS');
+  const headers = new Headers();
+  headers.append('Authorization', 'user:kamal');
+  const opts = new RequestOptions();
+  opts.headers = headers;
+  const url = `${this.apiRoot}`;
+  this.http.get(url, opts).subscribe(
+    res => console.log(res.json()),
+    msg =>  {
+      console.error(`Error: ${msg.status} ${msg.statusText}`);
+      alert(`Error: ${msg.status} ${msg.statusText}`);
+    }
+  );
+}
 
 }

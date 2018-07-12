@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-all-style-options',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-style-options.component.css']
 })
 export class AllStyleOptionsComponent implements OnInit {
-
-  constructor() { }
+  data: any;
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
-
 }

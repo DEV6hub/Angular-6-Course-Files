@@ -57,11 +57,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupUserInfoComponent },
   {
-    path: 'allStyleOptions',
-    loadChildren: 'app/style-gallery/style-gallery.module#StyleGalleryModule',
-    canLoad: [ AuthGuardService ]
-  },
-  {
     path: 'tshirtsDatabase',
     loadChildren: 'app/tshirts-database/tshirts-database.module#TShirtsDatabaseModule',
   },

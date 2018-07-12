@@ -70,6 +70,8 @@ describe('UserInfoService get calls', () => {
           body: JSON.stringify(mockResponse)
         })));
       });
-
+      userInfoService.getUser().subscribe((userInfo) => {
+        expect(userInfo.name).toBe('TestName');
+      });
     }));
   });

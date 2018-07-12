@@ -172,6 +172,20 @@ export class TshirtsDbComponent {
       console.log(res.json());
     });
   }
+  doPUT() {
+    console.log('PUT');
+    const url = `${this.apiRoot}/2`;
+    const data = {
+      'type': 'Mens Fine Jersey Short Sleeve',
+      'price': 21.99,
+      'imgSrc': '/assets/images/TShirtChange.jpg',
+      'gender': 'M'
+    };
+    this.http.put(url, data).subscribe(res => {
+        console.log(res.json());
+      } );
+  }
+
 
 
 

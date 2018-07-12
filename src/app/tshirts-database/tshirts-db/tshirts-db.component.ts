@@ -215,8 +215,17 @@ export class TshirtsDbComponent {
           alert(`Error: ${msg.status} ${msg.statusText}`);
         }
       );
-
-
-
+}
+doGETAsObservableError() {
+  console.log('GET AS OBSERVABLE ERROR');
+  const url = `${this.apiRoot}/post`;
+  this.http.get(url).subscribe(
+    res => console.log(res.json()),
+    msg => {
+      console.error(`Error: ${msg.status} ${msg.statusText}`);
+      alert(`Error: ${msg.status} ${msg.statusText}`);
+    }
+  );
+}
 
 }

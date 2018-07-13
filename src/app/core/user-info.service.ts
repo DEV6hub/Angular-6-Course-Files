@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import {UserInfo} from '../shared/user-info';
 import {HttpModule, Http, URLSearchParams, Headers, RequestOptions} from '@angular/http';
-import 'rxjs/add/operator/map';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Subject} from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs';
+import {map} from 'rxjs/operators';
 @Injectable()
 export class UserInfoService {
  _baseUrl = 'http://localhost:3000';
@@ -35,9 +33,9 @@ export class UserInfoService {
   }
 
   getUser() {
-   return this.http.get(this._baseUrl + '/userInfo')
-      .map(res => {
+   return this.http.get(this._baseUrl + '/userInfo').pipe(
+     map(res => {
         return res.json();
-      });
-  }
+      }));
+    }
 }

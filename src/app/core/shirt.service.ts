@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Shirt, Colour, Graphic } from '../shared/shirt';
+// tslint:disable-next-line:import-blacklist
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { SHIRTS } from '../constants/static-data.constants';
 import 'fabric';
 
 declare const fabric: any;
 
-const SHIRT_IMAGES_PATH = "../../../assets/images/plain-shirts/";
-const GRAPHICS_IMAGES_PATH = "../../../assets/images/graphics/";
+const SHIRT_IMAGES_PATH = '../../../assets/images/plain-shirts/';
+const GRAPHICS_IMAGES_PATH = '../../../assets/images/graphics/';
 
 @Injectable()
 export class ShirtService {
@@ -19,14 +20,14 @@ export class ShirtService {
     private editableShirtSubject: BehaviorSubject<Shirt>;
     private designCanvasSubject: BehaviorSubject<fabric.Canvas>;
 
-    private lastUsedId: number = 8;
+    private lastUsedId = 8;
 
     constructor() {
         this.shirtsSubject = new BehaviorSubject<Shirt[]>([]);
         this.shirts = SHIRTS;
         this.setShirts();
         this.editableShirt = new Shirt();
-        this.editableShirt.shirtStyle = "MensShirt";
+        this.editableShirt.shirtStyle = 'MensShirt';
         this.editableShirt.price = 19.99;
         this.editableShirt.graphic;
         this.editableShirtSubject = new BehaviorSubject(this.editableShirt);
@@ -86,7 +87,7 @@ export class ShirtService {
     }
 
     unselectGraphic(): void {
-        this.editableShirt.graphic = { name: "", colour: { name: "", value: ""}, fileName: "" };
+        this.editableShirt.graphic = { name: '', colour: { name: '', value: ''}, fileName: '' };
         this.emitEditableShirt();
     }
 
@@ -95,7 +96,7 @@ export class ShirtService {
     }
 
     getStyleImagePath(style?, shirt?: Shirt): string {
-        let obj: Shirt = shirt || this.editableShirt;
+        const obj: Shirt = shirt || this.editableShirt;
         return `${SHIRT_IMAGES_PATH}${(style) ? style.imgName : obj.shirtStyle}-${obj.shirtColour.name.toLowerCase()}.png`;
     }
 
@@ -104,14 +105,13 @@ export class ShirtService {
         let usedGraphic: Graphic;
         if (graphic) {
             usedGraphic = graphic;
-        }
-        else {
-            usedGraphic = this.editableShirt.graphic;    
+        } else {
+            usedGraphic = this.editableShirt.graphic;
         }
 
         return this.buildGraphicPath(usedGraphic);
 
-        // const file = `${(graphic) ? graphic.fileName : 
+        // const file = `${(graphic) ? graphic.fileName :
         //     (this.editableShirt.graphic.fileName !== '' ? this.editableShirt.graphic.fileName : '')}`;
 
         // return (file !== '') ? (this.editableShirt.graphic.colour && this.editableShirt.graphic.colour.value !== '') ?
@@ -129,18 +129,9 @@ export class ShirtService {
         return style.imgName === this.editableShirt.shirtStyle;
     }
 
-    // getShirt(id: number): Shirt {
-
-    //     this.getShirts().subscribe((shirts) => {
-    //         return shirts.filter(shirt => shirt.id === id);
-    //     });
-        
-
-    // }
-
     duplicateShirt(shirt: Shirt): void {
 
-        let idx: number = this.shirts.findIndex(s => s.id === shirt.id);
+        const idx: number = this.shirts.findIndex(s => s.id === shirt.id);
         if (idx !== -1) {
             const duplicatedShirt = Object.assign(new Shirt(), shirt, { id: ++this.lastUsedId });
             this.shirts.push(duplicatedShirt);
@@ -155,9 +146,8 @@ export class ShirtService {
     }
 
     deleteShirt(shirt: Shirt): void {
-        
-        let idx: number = this.shirts.findIndex(existingShirt => existingShirt.id === shirt.id);
-        if ( idx != -1 ) {
+        const idx: number = this.shirts.findIndex(existingShirt => existingShirt.id === shirt.id);
+        if ( idx !== -1 ) {
             this.shirts.splice(idx, 1);
             this.shirtsSubject.next(this.shirts);
         }

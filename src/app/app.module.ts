@@ -35,6 +35,7 @@ import { StylePickerComponent } from './components/style-picker/style-picker.com
 import { ColourPickerComponent } from './components/colour-picker/colour-picker.component';
 import { GraphicsPickerComponent } from './components/graphics-picker/graphics-picker.component';
 import { TextPickerComponent } from './components/text-picker/text-picker.component';
+import {ProgressBarComponent} from './components/progress-bar.component';
 import { GraphicTextEditorComponent } from './components/graphic-text-editor/graphic-text-editor.component';
 import { UserInfoService } from './core/user-info.service';
 import { HttpModule, Http } from '@angular/http';
@@ -92,11 +93,11 @@ const routes: Routes = [
     TextPickerComponent,
     GraphicTextEditorComponent,
     BackgroundChangeDirective,
-    StructuralUnlessDirective
+    StructuralUnlessDirective,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     RouterModule.forRoot(routes,
     {
       preloadingStrategy: PreloadAllModules

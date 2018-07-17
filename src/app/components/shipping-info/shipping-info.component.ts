@@ -4,8 +4,7 @@ import { COUNTRIES, REGIONS } from '../../constants/static-data.constants';
 import { SlidingPanelsService } from '../../core/sliding-panels.service';
 import { UserInfo } from '../../shared/user-info';
 import { UserInfoService } from '../../core/user-info.service';
-import { Subscription, Observable } from 'rxjs';
-//import {Observable} from 'rxjs/Observable';
+import { Subscription, Observable} from 'rxjs';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-shipping-info',
@@ -42,7 +41,6 @@ export class ShippingInfoComponent implements OnInit {
     this.slidingPanelsService.togglePaymentMethod(true);
     }
   }
-
   reset() {
     this.form.reset();
     window.alert('All fields are cleared up.');

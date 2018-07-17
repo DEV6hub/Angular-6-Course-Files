@@ -2,7 +2,15 @@
   <div class="row">
     <div class="col-4">
       <div class="image-frame">
-        <img class="img-fluid rounded" src="{{item.shirt.imagePath}}" alt="Sample photo">
+        <!-- <img class="img-fluid rounded" src="{{item.shirt.imagePath}}" alt="Sample photo"> -->
+        <img [hidden]="item.shirt.savedDesign.canvasJSON !== null" class="img-fluid rounded" src="{{item.shirt.imagePath}}" alt="Sample photo">
+    
+        <div class="img-view" [hidden]="item.shirt.imagePath !== ''">
+          <img class="img-fluid" src="{{getStyleImagePath()}}"  alt="shirt design">
+          <div class="graphic-img">
+            <canvas class="canvas-container" #canvas width="380" height="380" name="canvas"></canvas>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-8">

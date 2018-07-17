@@ -5,6 +5,7 @@ import {URLSearchParams, Headers, RequestOptions} from '@angular/http';
 // tslint:disable-next-line:import-blacklist
 import { BehaviorSubject } from 'rxjs';
 import {map} from 'rxjs/operators';
+
 @Injectable()
 export class UserInfoService {
  _baseUrl = 'http://localhost:3000';
@@ -12,8 +13,12 @@ export class UserInfoService {
  userInfo: UserInfo;
  private userInfoSubject = new BehaviorSubject(this.userInfo);
 
-  constructor(private http: HttpClient) {
+ constructor(private http: HttpClient) {
     this.isLoggedIn = false;
+  }
+
+  getUserState() {
+    return this.userInfoSubject.asObservable();
   }
 
   addUser(user: UserInfo) {

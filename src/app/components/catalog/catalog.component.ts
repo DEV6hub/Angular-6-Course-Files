@@ -54,10 +54,6 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): any {
-    // this.route.snapshot.data.message.subscribe((res) => {
-    //   this.userInfoService.userInfo = res;
-    // });
-    //this.userInfoService.userInfo = this.route.snapshot.data.message as UserInfo;
     this.subscriptions.push(this.shirtService.getShirts().subscribe((result) => {
       this.shirts = result;
       this.updateDesignCount(this.catalogTabset.activeId);
@@ -99,6 +95,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
 
     this.shippingInfoPanelWidth = this.shippingInfoPanel.nativeElement.offsetWidth;
     this.paymentMethodPanelWidth = this.paymentMethodPanel.nativeElement.offsetWidth;
+    this.designName = '';
   }
 
   ngOnDestroy(): any {
@@ -119,15 +116,19 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   saveDesign(): void {
-    if (this.designName !== '') {
+    if (this.designName && this.designName !== '') {
       this.shirtService.getDesignCanvas().subscribe((canvas) => {
-        let newShirt: Shirt = this.editableShirt;
-        newShirt.canvasJSON = canvas.toDatalessJSON();
+        const newShirt: Shirt =  Object.assign(new Shirt(), this.editableShirt);
+        if (canvas) {
+          newShirt.savedDesign.canvasJSON = canvas.toDatalessJSON();
+          newShirt.savedDesign.canvasHeight = canvas.getHeight();
+          newShirt.savedDesign.canvasWidth = canvas.getWidth();
+        }
         newShirt.name = this.designName;
         this.shirtService.addShirt(newShirt);
-        //this.router.navigateByUrl('/catalog');
+        // this.router.navigateByUrl('/catalog');
+        // this.shirtService.resetEditableShirt();
         this.showDesignShirt = false;
-        this.editableShirt = null;
       });
     }
   }
@@ -135,8 +136,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   toggleShoppingCart(state?: boolean): void {
     if (state !== undefined) {
       this.showShoppingCart = state;
-    }
-    else {
+    } else {
       if (!this.showShoppingCart) {
         this.showShoppingCart = true;
       } else {
@@ -201,13 +201,13 @@ export class CatalogComponent implements OnInit, OnDestroy {
   private updateDesignCount(tabId: string): void {
     const shirtGenderPipe: ShirtGenderPipe = new ShirtGenderPipe();
     switch (tabId) {
-      case "tab-men-designs":
+      case 'tab-men-designs':
         this.designsCount = shirtGenderPipe.transform(this.shirts, 'M').length;
         break;
-      case "tab-women-designs":
+      case 'tab-women-designs':
         this.designsCount = shirtGenderPipe.transform(this.shirts, 'F').length;
         break;
-      case "tab-all-designs":
+      case 'tab-all-designs':
       default:
         this.designsCount = this.shirts.length;
     }

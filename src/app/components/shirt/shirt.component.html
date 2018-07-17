@@ -1,13 +1,23 @@
 <div class="card text-center">
   <div class="img-view" (click)="actionButtonsShown = !actionButtonsShown" (clickOutside)="actionButtonsShown = false">
-    <img [hidden]="shirt.canvasJSON !== ''" class="img-fluid" src="{{shirt.imagePath}}" alt="Sample photo">
+    <img [ngClass]="{'shifted': actionButtonsShown}" [hidden]="shirt.savedDesign.canvasJSON !== null" class="img-fluid" src="{{shirt.imagePath}}" alt="Sample photo">
     
-    <div [hidden]="shirt.imagePath !== ''" [ngClass]="{'shifted': actionButtonsShown}">
-      <img class="img-fluid" src="{{getStyleImagePath()}}" alt="shirt design">
-      <div class="graphic-img">
-        <canvas #canvas name="canvas" height="380" width="380"></canvas>
+    <div class="img-view" [hidden]="shirt.imagePath !== ''" [ngClass]="{'shifted fluid': actionButtonsShown}">
+      <img class="img-fluid" src="{{getStyleImagePath()}}"  alt="shirt design">
+      <div class="graphic-img" [ngClass]="{'shifted': actionButtonsShown}">
+        <canvas class="canvas-container" #canvas width="380" height="380" name="canvas"></canvas>
       </div>
     </div>
+
+    <!-- <div class="design-col">
+      <div class="card image-design">
+        <img class="img-fluid" src="{{getStyleImagePath()}}" alt="shirt design">
+        <div class="graphic-img">
+          <app-graphic-text-editor *ngIf="hasGraphic() || hasText()" #graphicEditor [textColour]="editableShirt.text.colour.value"
+            [fontFamily]="getTextFont()" [inputText]="getTextValue()" (inputTextChange)="changeTextValue($event)" [imageUrl]="getGraphicImagePath()"></app-graphic-text-editor>
+        </div>
+      </div>
+    </div> -->
     <div class="actions-container" [hidden]="!actionButtonsShown">
       <button type="button" class="primary-btn" (click)="edit(shirt)">EDIT</button>
       <button type="button" class="primary-btn" (click)="duplicate(shirt)">DUPLICATE</button>

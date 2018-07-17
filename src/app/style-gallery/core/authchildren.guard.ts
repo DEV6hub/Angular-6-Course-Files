@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-// tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs';
 import { ShoppingCartService } from '../../core/shopping-cart.service';
 

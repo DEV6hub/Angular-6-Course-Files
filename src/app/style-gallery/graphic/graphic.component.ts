@@ -1,16 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-graphic',
   templateUrl: './graphic.component.html',
-  styleUrls: ['./graphic.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./graphic.component.css']
 })
 export class GraphicComponent implements OnInit {
   graphicName: string;
 
   constructor(private route: ActivatedRoute) {
+    console.log('const');
    }
 
   ngOnInit() {

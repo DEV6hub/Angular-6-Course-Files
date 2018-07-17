@@ -23,7 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopping-cart-item.component';
 import { SizeSelectComponent } from './shared/size-select.component';
-
+import {ProgressBarComponent} from './components/progress-bar.component';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { ShippingInfoComponent } from './components/shipping-info/shipping-info.component';
@@ -35,7 +35,6 @@ import { StylePickerComponent } from './components/style-picker/style-picker.com
 import { ColourPickerComponent } from './components/colour-picker/colour-picker.component';
 import { GraphicsPickerComponent } from './components/graphics-picker/graphics-picker.component';
 import { TextPickerComponent } from './components/text-picker/text-picker.component';
-import {ProgressBarComponent} from './components/progress-bar.component';
 import { GraphicTextEditorComponent } from './components/graphic-text-editor/graphic-text-editor.component';
 import { UserInfoService } from './core/user-info.service';
 import { HttpModule, Http } from '@angular/http';
@@ -46,10 +45,12 @@ import { AuthGuard } from './core/auth.guard';
 import { AuthGuardService } from './core/auth-guard.service';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-//// AoT requires an exported function for factories
+// AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+import { CanvasScalerFactoryService } from './shared/canvas-scaler';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -66,9 +67,8 @@ const routes: Routes = [
   },
   {
     path: 'catalog', component: CatalogComponent,
-     canActivate: [AuthGuard]
-  },
-  { path: '**', component: HomeComponent}
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
@@ -98,6 +98,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     RouterModule.forRoot(routes,
     {
       preloadingStrategy: PreloadAllModules
@@ -123,7 +124,8 @@ const routes: Routes = [
   providers: [
     UserInfoService,
     AuthGuard,
-    AuthGuardService
+    AuthGuardService,
+    CanvasScalerFactoryService
   ],
   bootstrap: [AppComponent]
 })

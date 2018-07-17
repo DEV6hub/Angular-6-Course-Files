@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShirtService } from '../../core/shirt.service';
-import { Shirt, Graphic, Colour } from '../../shared/shirt';
+import { Shirt, IGraphic, IColour } from '../../shared/shirt';
 import { Subscription } from 'rxjs';
 
 const FRACTAL_PATH = '../../../assets/images/Fractal.png';
@@ -19,16 +19,17 @@ export class DesignShirtComponent implements OnInit {
   editableShirt: Shirt;
   sub: Subscription;
 
-  colourPickerTitle: string = 'Choose a shirt colour';
+  colourPickerTitle = 'Choose a shirt colour';
 
   constructor(private shirtService: ShirtService) {
   }
 
   ngOnInit() {
-    let savedTab = localStorage.getItem(SAVED_TAB);
+    const savedTab = localStorage.getItem(SAVED_TAB);
     if (!savedTab) {
       localStorage.setItem(SAVED_TAB, '1');
     }
+    // tslint:disable-next-line:radix
     this.activeTab = parseInt(localStorage.getItem(SAVED_TAB));
     this.sub = this.shirtService.getEditableShirt().subscribe((shirt) => {
       this.editableShirt = shirt;
@@ -48,12 +49,12 @@ export class DesignShirtComponent implements OnInit {
     return this.editableShirt.graphic.fileName ? this.shirtService.getGraphicImagePath(graphic) : '';
   }
 
-  changeGraphic(graphic?: Graphic): void {
+  changeGraphic(graphic?: IGraphic): void {
     const selectedGraphic = graphic ? graphic : this.editableShirt.graphic;
     this.editableShirt.graphic = selectedGraphic;
   }
 
-  changeGraphicColour(colour: Colour): void {
+  changeGraphicColour(colour: IColour): void {
     this.editableShirt.graphic.colour = colour;
   }
 

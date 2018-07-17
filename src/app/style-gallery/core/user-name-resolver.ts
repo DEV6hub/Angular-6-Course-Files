@@ -5,8 +5,6 @@ import { Resolve } from '@angular/router';
 // tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs';
 import { take, map} from 'rxjs/operators';
-
-
 import { UserInfoService } from '../../core/user-info.service';
 
 @Injectable()
@@ -20,5 +18,6 @@ export class UsernameResolver implements Resolve<any> {
         return data;
       })
     );
+
   }
 }

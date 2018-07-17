@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Shirt, Colour, Graphic } from '../../shared/shirt';
+import { Shirt, IColour, IGraphic } from '../../shared/shirt';
 import { Subscription } from 'rxjs';
 import { ShirtService } from '../../core/shirt.service';
 import { GRAPHICS } from '../../constants/static-data.constants';
@@ -12,16 +12,16 @@ import { GRAPHICS } from '../../constants/static-data.constants';
 export class GraphicsPickerComponent implements OnInit {
 
   graphics = GRAPHICS;
-  @Output() changeGraphic: EventEmitter<Graphic>;
-  @Output() changeGraphicColour: EventEmitter<Colour>;
+  @Output() changeGraphic: EventEmitter<IGraphic>;
+  @Output() changeGraphicColour: EventEmitter<IColour>;
 
   editableShirt: Shirt;
   sub: Subscription;
-  graphicColourTitle: string = 'Change graphic colour';
+  graphicColourTitle = 'Change graphic colour';
 
   constructor(private shirtService: ShirtService) {
-    this.changeGraphic = new EventEmitter<Graphic>();
-    this.changeGraphicColour = new EventEmitter<Colour>();
+    this.changeGraphic = new EventEmitter<IGraphic>();
+    this.changeGraphicColour = new EventEmitter<IColour>();
    }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class GraphicsPickerComponent implements OnInit {
 
   pickGraphic(graphic): void {
     const newGraphic = { name: graphic.name, fileName: graphic.fileName };
-    //this.shirtService.updateShirtGraphic(newGraphic);
+    // this.shirtService.updateShirtGraphic(newGraphic);
     this.changeGraphic.emit(newGraphic);
     // Object.assign(this.editableShirt.graphic, graphic);
   }
@@ -42,8 +42,8 @@ export class GraphicsPickerComponent implements OnInit {
     return path;
   }
 
-  changeColour(colour: Colour): void {
-    //this.shirtService.selectGraphicColour(colour);
+  changeColour(colour: IColour): void {
+    // this.shirtService.selectGraphicColour(colour);
     this.changeGraphicColour.emit(colour);
   }
 

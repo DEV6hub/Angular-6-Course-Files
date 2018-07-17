@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" minlength=12 maxlength=12 required #phone="ngModel" pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"
+          <input type="tel" id="phone" name="phone" minlength=10 maxlength=10 required #phone="ngModel" pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"
             class="form-control" [(ngModel)]="model.phone" placeholder="555-123-1234">
           <div class="validation-error" *ngIf="phone.errors && (phone.dirty || phone.touched)">
             <p *ngIf="phone.errors.required">Phone is required</p>
@@ -98,7 +98,7 @@
       </div>
     </div>
     <div class="float-right go-to-payment">
-      <button type="button" class="primary-danger-btn" (click)="reset()">RESET</button>
+      <button type="button" class="primary-danger-btn" (click)="cancel()">Cancel</button>
       <button type="submit" class="primary-btn" [disabled]="f.invalid">GO TO PAYMENT</button>
     </div>
   </form>

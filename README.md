@@ -1,4 +1,4 @@
-# DPIDE DEMO
+# Shirtastic App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
 
@@ -11,7 +11,7 @@ Run `npm install`
 The json server will serve rest api's to be used for Shirtastic.It will run on
 localhost:3000.Go to folder JSON Server.
 
-Run below commands for the middleware server.
+Run below commands for the server.
 `json-server --watch db.json` 
 `json-server --watch tshirts.json --port 4000` 
 
@@ -35,7 +35,7 @@ To generate code coverage documentation, run `ng test --code-coverage` and the r
 
 ## Running end-to-end tests
 
-Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Further help
 

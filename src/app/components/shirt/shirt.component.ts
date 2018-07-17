@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, ElementRef, ViewChild, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { Shirt } from '../../shared/shirt';
 import { ShoppingCartService } from '../../core/shopping-cart.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { ShirtSize } from '../../shared/shirt-size';
 import { ShirtService } from '../../core/shirt.service';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Shirt, IColour, IGraphic } from '../../shared/shirt';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { ShirtService } from '../../core/shirt.service';
 import { GRAPHICS } from '../../constants/static-data.constants';
 

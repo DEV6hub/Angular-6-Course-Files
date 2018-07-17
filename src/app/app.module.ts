@@ -11,7 +11,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ShirtComponent } from './components/shirt/shirt.component';
 
-import { ShirtGenderPipe } from './filters/shirt-filter';
+import { ShirtGenderPipe } from './filters/shirt-filter.pipe';
 // For material
 import { MatTabsModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
@@ -23,7 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopping-cart-item.component';
 import { SizeSelectComponent } from './shared/size-select.component';
-
+import {ProgressBarComponent} from './components/progress-bar.component';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { ShippingInfoComponent } from './components/shipping-info/shipping-info.component';
@@ -93,7 +93,8 @@ const routes: Routes = [
     TextPickerComponent,
     GraphicTextEditorComponent,
     BackgroundChangeDirective,
-    StructuralUnlessDirective
+    StructuralUnlessDirective,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,

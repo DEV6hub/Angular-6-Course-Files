@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShirtService } from '../../core/shirt.service';
 import { Shirt, IGraphic, IColour } from '../../shared/shirt';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 const FRACTAL_PATH = '../../../assets/images/Fractal.png';
 const SAVED_TAB = 'design_tab';

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShirtService } from '../../core/shirt.service';
 import { Shirt, IGraphic, IColour } from '../../shared/shirt';
+// tslint:disable-next-line:import-blacklist
 import { Subscription } from 'rxjs';
 
 const FRACTAL_PATH = '../../../assets/images/Fractal.png';

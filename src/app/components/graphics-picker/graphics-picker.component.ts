@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Shirt, IColour, IGraphic } from '../../shared/shirt';
+// tslint:disable-next-line:import-blacklist
 import { Subscription } from 'rxjs';
 import { ShirtService } from '../../core/shirt.service';
 import { GRAPHICS } from '../../constants/static-data.constants';

@@ -127,7 +127,7 @@ export class TshirtsDbComponent {
   doGETWithHeaders() {
     console.log('GET WITH HEADERS');
     const headers = new Headers();
-    headers.append('Authorization', 'user:kamal');
+    headers.append('Authorization', 'user:Gagan');
     const opts = new RequestOptions();
     opts.headers = headers;
     const url = `${this.apiRoot}`;

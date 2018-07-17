@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Shirt, Colour, Graphic } from '../shared/shirt';
-// tslint:disable-next-line:import-blacklist
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Shirt, IColour, IGraphic } from '../shared/shirt';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { SHIRTS } from '../constants/static-data.constants';
 import 'fabric';
 
@@ -26,12 +26,18 @@ export class ShirtService {
         this.shirtsSubject = new BehaviorSubject<Shirt[]>([]);
         this.shirts = SHIRTS;
         this.setShirts();
-        this.editableShirt = new Shirt();
-        this.editableShirt.shirtStyle = 'MensShirt';
-        this.editableShirt.price = 19.99;
-        this.editableShirt.graphic;
+        this.editableShirt = this.initiateEditableShirt();
+        // this.editableShirt.graphic;
         this.editableShirtSubject = new BehaviorSubject(this.editableShirt);
         this.designCanvasSubject = new BehaviorSubject(this.designCanvas);
+    }
+
+    private initiateEditableShirt(): Shirt {
+        const s: Shirt = new Shirt();
+        s.shirtStyle = 'MensShirt';
+        s.description = 'Mens Fine Jersey Short Sleeve';
+        s.price = 19.99;
+        return s;
     }
 
     private setShirts() {
@@ -40,6 +46,11 @@ export class ShirtService {
 
     private emitEditableShirt(): void {
         this.editableShirtSubject.next(this.editableShirt);
+    }
+
+    resetEditableShirt(): void {
+        this.editableShirt = this.initiateEditableShirt();
+        this.emitEditableShirt();
     }
 
     setDesignCanvas(canvas: fabric.Canvas): void {
@@ -70,7 +81,7 @@ export class ShirtService {
         this.emitEditableShirt();
     }
 
-    selectGraphicColour(colour: Colour): void {
+    selectGraphicColour(colour: IColour): void {
         this.editableShirt.graphic.colour = colour;
         this.editableShirt.graphic.fileName = this.getGraphicImagePath();
         this.emitEditableShirt();
@@ -81,7 +92,7 @@ export class ShirtService {
         this.emitEditableShirt();
     }
 
-    updateShirtGraphic(graphic: Graphic): void {
+    updateShirtGraphic(graphic: IGraphic): void {
         this.editableShirt.graphic = graphic;
         this.emitEditableShirt();
     }
@@ -102,7 +113,7 @@ export class ShirtService {
 
     getGraphicImagePath(graphic?): string {
 
-        let usedGraphic: Graphic;
+        let usedGraphic: IGraphic;
         if (graphic) {
             usedGraphic = graphic;
         } else {
@@ -119,15 +130,24 @@ export class ShirtService {
         //     `${GRAPHICS_IMAGES_PATH}${file}` : '';
     }
 
-    private buildGraphicPath(graphic: Graphic): string {
+    private buildGraphicPath(graphic: IGraphic): string {
         return (graphic.colour && graphic.colour.value !== '') ?
-            `${GRAPHICS_IMAGES_PATH}${graphic.fileName.split('.')[0].trim()}_${graphic.colour.value.replace('#', '')}.png`:
+            `${GRAPHICS_IMAGES_PATH}${graphic.fileName.split('.')[0].trim()}_${graphic.colour.value.replace('#', '')}.png` :
             `${GRAPHICS_IMAGES_PATH}${graphic.fileName}`;
     }
 
     isStyleSelected(style): boolean {
         return style.imgName === this.editableShirt.shirtStyle;
     }
+
+    // getShirt(id: number): Shirt {
+
+    //     this.getShirts().subscribe((shirts) => {
+    //         return shirts.filter(shirt => shirt.id === id);
+    //     });
+
+
+    // }
 
     duplicateShirt(shirt: Shirt): void {
 
@@ -146,6 +166,7 @@ export class ShirtService {
     }
 
     deleteShirt(shirt: Shirt): void {
+
         const idx: number = this.shirts.findIndex(existingShirt => existingShirt.id === shirt.id);
         if ( idx !== -1 ) {
             this.shirts.splice(idx, 1);

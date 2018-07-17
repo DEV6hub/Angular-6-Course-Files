@@ -1,7 +1,8 @@
-import { Component, ElementRef, Input, Output, EventEmitter, AfterViewChecked, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, Output, EventEmitter, AfterViewChecked, Renderer2, ViewChild, AfterContentInit } from '@angular/core';
 import 'fabric';
-import { IText } from 'fabric/fabric-impl';
 import { ShirtService } from '../../core/shirt.service';
+import { CanvasScaler, CanvasScalerFactoryService } from '../../shared/canvas-scaler';
+import { IText } from 'fabric/fabric-impl';
 declare const fabric: any;
 
 const TIMES_PATH = "../../../assets/images/icon-times.svg";
@@ -11,23 +12,46 @@ const TIMES_PATH = "../../../assets/images/icon-times.svg";
   templateUrl: './graphic-text-editor.component.html',
   styleUrls: ['./graphic-text-editor.component.css']
 })
-export class GraphicTextEditorComponent implements AfterViewChecked {
+export class GraphicTextEditorComponent implements AfterViewChecked, AfterContentInit {
 
   private canvas: fabric.Canvas;
-  private currentImage: fabric.Image;
-  private currentTextbox: any;
-  private currentCloseButton: any;
+  private _currentImage: fabric.Image;
+  private _currentTextbox: any;
+  private _currentCloseButton: any;
   private _inputText: string;
   private _fontFamily: string;
   private _textColour: string;
   private _imageUrl: string;
-
-  private widthScale: number;
-  private heightScale: number;
-
-  
+  private canvasScaler: CanvasScaler; 
 
   @ViewChild('canvas') canvasElement: ElementRef;
+
+  set currentImage(value: fabric.Image) {
+    this._currentImage = value;
+    this.canvasScaler.currentImage = this._currentImage;
+  }
+
+  set currentTextbox(value: any) {
+    this._currentTextbox = value;
+    this.canvasScaler.currentTextbox = this._currentTextbox;
+  }
+
+  set currentCloseButton(value: any) {
+    this._currentCloseButton = value;
+    this.canvasScaler.currentCloseButton = this._currentCloseButton;
+  }
+
+  get currentImage(): fabric.Image {
+    return this._currentImage;
+  }
+
+  get currentTextbox(): any {
+    return this._currentTextbox;
+  }
+
+  get currentCloseButton(): any {
+    return this._currentCloseButton;
+  }
 
   @Input()
   set imageUrl(value: string) {
@@ -70,49 +94,15 @@ export class GraphicTextEditorComponent implements AfterViewChecked {
     return this._textColour;
   }
 
-  constructor(private element: ElementRef, private renderer: Renderer2, private shirtService: ShirtService) { }
-
-  ngAfterViewChecked() {
-    this.adjustCanvasAndObjectsSize();
+  constructor(private element: ElementRef, private renderer: Renderer2, private shirtService: ShirtService, private canvasScalerFactory: CanvasScalerFactoryService) {
   }
 
-  private adjustCanvasAndObjectsSize(): void {
+  ngAfterContentInit() {
+    this.canvasScaler = this.canvasScalerFactory.createCanvasScaler(this.canvas, this.currentImage, this.currentTextbox, this.currentCloseButton);  
+  }
 
-    const w = this.element.nativeElement.parentElement.clientWidth;
-    const h = this.element.nativeElement.parentElement.clientHeight;
-    let widthOrHeightChanged = false;
-
-    if (this.canvas) {
-      const canvasW = this.canvas.getWidth();
-      const canvasH = this.canvas.getHeight();
-
-      if (w !== canvasW) {
-        this.canvas.setWidth(w);
-        widthOrHeightChanged = true;
-        this.widthScale = w / canvasW;
-      }
-
-      if (h !== canvasH) {
-        this.canvas.setHeight(h);
-        widthOrHeightChanged = true;
-        this.heightScale = h / canvasH;
-      }
-
-      if (this.currentImage && widthOrHeightChanged) {
-        this.rescaleImage(this.currentImage);
-        this.canvas.renderAll();
-      }
-
-      if (this.currentTextbox && widthOrHeightChanged) {
-        this.rescaleText(this.currentTextbox);
-        this.canvas.renderAll();
-      }
-
-      if (this.currentCloseButton && widthOrHeightChanged) {
-        this.rescaleCloseButton(this.currentCloseButton);
-        this.canvas.renderAll();
-      }
-    }
+  ngAfterViewChecked() {
+    this.canvasScaler.adjustCanvasAndObjectsSize(this.element.nativeElement.parentElement.clientWidth, this.element.nativeElement.parentElement.clientHeight);
   }
 
   private loadCanvas(): void {
@@ -164,38 +154,6 @@ export class GraphicTextEditorComponent implements AfterViewChecked {
     });
   }
 
-  private rescaleImage(image: fabric.Image): void {
-    if (this.widthScale) {
-      image.scaleX = image.scaleX * this.widthScale;
-      image.left = image.left * this.widthScale;
-    }
-    if (this.heightScale) {
-      image.scaleY = image.scaleY * this.heightScale;
-      image.top = image.top * this.heightScale;
-    }
-  }
-
-  private rescaleText(textbox: any): void {
-    if (this.widthScale) {
-      textbox.scaleX = textbox.scaleX * this.widthScale;
-      textbox.left = textbox.left * this.widthScale;
-    }
-    if (this.heightScale) {
-      textbox.scaleY = textbox.scaleY * this.heightScale;
-      textbox.top = textbox.top * this.heightScale;
-    }
-  }
-
-  private rescaleCloseButton(closeButton: any): void {
-    if (this.widthScale) {
-      this.renderer.setStyle(closeButton, 'left', closeButton.offsetLeft * this.widthScale + 'px');
-    }
-    if (this.heightScale) {
-      this.renderer.setStyle(closeButton, 'top', closeButton.offsetTop * this.heightScale + 'px');
-    }
-  }
-
-
   public loadImage(imgUrl?: string): void {
     const imgUrlToUse = imgUrl || this.imageUrl;
     console.log(imgUrlToUse);
@@ -208,7 +166,7 @@ export class GraphicTextEditorComponent implements AfterViewChecked {
 
     if (this.currentImage) {
       this.currentImage.setSrc(imgUrlToUse, (img) => {
-        this.rescaleImage(img);
+        this.canvasScaler.rescaleImage(img);
         this.currentImage = img;
         this.canvas.setActiveObject(img);
         this.canvas.renderAll();
@@ -257,7 +215,7 @@ export class GraphicTextEditorComponent implements AfterViewChecked {
       if (this.textColour) {
         this.currentTextbox.set('fill', this.textColour);
       }
-      this.rescaleText(this.currentTextbox);
+      this.canvasScaler.rescaleText(this.currentTextbox);
       this.canvas.setActiveObject(this.currentTextbox);
       this.canvas.renderAll();
 

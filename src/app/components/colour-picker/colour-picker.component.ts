@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { Shirt, Colour } from '../../shared/shirt';
-import { Subscription } from 'rxjs';
+import { Shirt, IColour } from '../../shared/shirt';
 import { ShirtService } from '../../core/shirt.service';
 import { EventEmitter } from '@angular/core';
 import { COLOURS } from '../../constants/static-data.constants';
@@ -15,23 +14,23 @@ export class ColourPickerComponent implements OnInit {
   colours = COLOURS;
 
   @Input() title: string;
-  @Input() selectedColour: Colour;
-  @Output() selectedColourChange: EventEmitter<Colour>;
+  @Input() selectedColour: IColour;
+  @Output() selectedColourChange: EventEmitter<IColour>;
 
   constructor(private shirtService: ShirtService) {
-    this.selectedColourChange = new EventEmitter<Colour>();
+    this.selectedColourChange = new EventEmitter<IColour>();
   }
 
   ngOnInit() {
   }
 
-  pickColour(colour: Colour): void {
+  pickColour(colour: IColour): void {
     this.selectedColourChange.emit(colour);
   }
 
-  showSelected(colour: Colour): boolean {
+  showSelected(colour: IColour): boolean {
     if (this.selectedColour) {
-     return this.selectedColour.name.toLowerCase() === colour.name.toLowerCase()
+     return this.selectedColour.name.toLowerCase() === colour.name.toLowerCase();
     }
     return false;
   }

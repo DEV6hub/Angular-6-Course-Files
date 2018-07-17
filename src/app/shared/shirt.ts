@@ -1,4 +1,4 @@
-import { ColourPickerComponent } from "../components/colour-picker/colour-picker.component";
+import { ColourPickerComponent } from '../components/colour-picker/colour-picker.component';
 
 export class Shirt {
 
@@ -9,32 +9,38 @@ export class Shirt {
         public price: number = 0,
         public imagePath: string = '',
         public gender?: 'M' | 'F',
-        public shirtColour: Colour = { name: 'white', value: "#FFFFFF" },
+        public shirtColour: IColour = { name: 'white', value: '#FFFFFF' },
         public shirtStyle: string = '',
-        public graphic: Graphic =
-            { name: "", colour: { name: "", value: ""}, fileName: "" },
-        public text: Text = {
+        public graphic: IGraphic =
+            { name: '', colour: { name: '', value: ''}, fileName: '' },
+        public text: IText = {
             value: '',
-            colour: { name: 'black', value: '#444444'}, 
+            colour: { name: 'black', value: '#444444'},
             font: '"Montserrat", sans-serif'
         },
-        public canvasJSON: Object = ''
+        public savedDesign: ISavedDesign = { canvasHeight: 0, canvasWidth: 0, canvasJSON: null }
     ) {}
 }
 
-export interface Text {
-    value: string,
-    colour: Colour,
-    font: string
+export interface IText {
+    value: string;
+    colour: IColour;
+    font: string;
 }
 
-export interface Graphic {
-    name: string,
-    colour?: Colour,
-    fileName: string
+export interface IGraphic {
+    name: string;
+    colour?: IColour;
+    fileName: string;
 }
 
-export interface Colour {
-    name: string,
-    value: string
+export interface IColour {
+    name: string;
+    value: string;
+}
+
+export interface ISavedDesign {
+    canvasJSON: Object;
+    canvasWidth: number;
+    canvasHeight: number;
 }

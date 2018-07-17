@@ -12,6 +12,7 @@ export class AllStyleOptionsComponent implements OnInit {
 
   ngOnInit() {
     this.data = this.route.snapshot.data;
+    console.log(this.data);
   }
   canDeactivate() {
     console.log('i am navigating away');

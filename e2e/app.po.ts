@@ -6,6 +6,14 @@ export class AppPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('app-root div h2')).getText();
+  }
+
+  getSaveButton() {
+    return element(by.css('app-root div button'));
+  }
+
+  getCatalogText() {
+    return element(by.css('app-catalog div nav')).getText();
   }
 }

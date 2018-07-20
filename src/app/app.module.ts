@@ -50,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 import { CanvasScalerFactoryService } from './shared/canvas-scaler';
-import { ShirtFilterPipe } from './filters/shirt-filter.pipe';
+import { ShirtGenderPipe } from './filters/shirt-filter.pipe';
 
 
 const routes: Routes = [
@@ -95,7 +95,7 @@ const routes: Routes = [
     BackgroundChangeDirective,
     StructuralUnlessDirective,
     ProgressBarComponent,
-    ShirtFilterPipe
+    ShirtGenderPipe
   ],
   imports: [
     BrowserModule,

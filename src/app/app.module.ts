@@ -49,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 import { CanvasScalerFactoryService } from './shared/canvas-scaler';
+import { UserInfoService } from './core/user-info.service';
 
 
 const routes: Routes = [
@@ -121,6 +122,7 @@ const routes: Routes = [
   })
   ],
   providers: [
+    UserInfoService,
     AuthGuard,
     AuthGuardService,
     CanvasScalerFactoryService
